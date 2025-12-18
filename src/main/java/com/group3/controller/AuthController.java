@@ -1,12 +1,13 @@
-package com.nanda.controller;
+package com.group3.controller;
 
-import com.nanda.config.JwtUtil;
-import com.nanda.model.AuthRequest;
-import com.nanda.model.AuthResponse;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import com.group3.config.JwtUtil;
+import com.group3.model.AuthRequest;
+import com.group3.model.AuthResponse;
 
 @RestController
 @RequestMapping("/api/auth")

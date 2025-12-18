@@ -1,7 +1,9 @@
-package com.nanda.repository;
+package com.group3.repository;
 
-import com.nanda.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.group3.model.Users;
+
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<Users, Integer>

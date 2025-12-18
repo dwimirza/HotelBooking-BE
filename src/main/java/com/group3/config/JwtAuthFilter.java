@@ -1,4 +1,4 @@
-package com.nanda.config;
+package com.group3.config;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

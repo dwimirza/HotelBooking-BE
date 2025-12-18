@@ -1,4 +1,4 @@
-package com.nanda.config;
+package com.group3.config;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

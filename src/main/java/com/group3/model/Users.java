@@ -1,4 +1,4 @@
-package com.nanda.model;
+package com.group3.model;
 
 import java.time.LocalDateTime;  // ← Change from LocalDate
 

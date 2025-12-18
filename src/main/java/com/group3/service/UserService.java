@@ -1,8 +1,9 @@
-package com.nanda.service;
+package com.group3.service;
 
-import com.nanda.model.Users;
-import com.nanda.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
+import com.group3.model.Users;
+import com.group3.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;

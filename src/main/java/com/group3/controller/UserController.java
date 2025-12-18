@@ -1,8 +1,9 @@
-package com.nanda.controller;
+package com.group3.controller;
 
-import com.nanda.model.Users;
-import com.nanda.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import com.group3.model.Users;
+import com.group3.service.UserService;
 
 import java.util.List;
 
