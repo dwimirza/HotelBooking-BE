@@ -1,9 +1,8 @@
-package com.group3.entity;
+package com.group3.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

@@ -1,7 +1,7 @@
 package com.group3.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.group3.entity.Hotel;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

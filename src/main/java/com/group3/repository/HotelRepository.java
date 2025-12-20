@@ -1,7 +1,9 @@
 package com.group3.repository;
 
-import com.group3.entity.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.group3.model.Hotel;
+
 import java.util.List;
 
 public interface HotelRepository extends JpaRepository<Hotel, Integer> {

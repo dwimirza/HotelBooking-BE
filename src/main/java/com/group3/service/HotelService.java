@@ -1,6 +1,6 @@
 package com.group3.service;
 
-import com.group3.entity.Hotel;
+import com.group3.model.Hotel;
 import com.group3.repository.HotelRepository;
 import org.springframework.stereotype.Service;
 

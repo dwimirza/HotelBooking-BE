@@ -1,6 +1,6 @@
 package com.group3.controller;
 
-import com.group3.entity.Hotel;
+import com.group3.model.Hotel;
 import com.group3.service.HotelService;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class HotelController {
     @GetMapping
     public List<Hotel> list(
             @RequestParam(required = false) String hotelName,
-            @RequestParam(required = false) String city) {
+            @RequestParam(required = false) String city)  {
         return service.search(hotelName, city);
     }
 
