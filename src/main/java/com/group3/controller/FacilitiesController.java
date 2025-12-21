@@ -15,28 +15,36 @@ public class FacilitiesController {
         this.service = service;
     }
 
-    // GET: semua fasilitas (untuk admin / debugging)
     @GetMapping
     public List<Facilities> getAll() {
         return service.findAll();
     }
 
-    // GET: fasilitas untuk 1 hotel tertentu
     @GetMapping("/{hotelId}")
     public Facilities getByHotelId(@PathVariable Integer hotelId) {
         return service.findByHotelId(hotelId);
     }
 
-    // POST: buat fasilitas baru untuk hotel yang SUDAH ada
+    @GetMapping("/search")
+    public List<Facilities> searchFacilities(
+            @RequestParam(required = false) Boolean swimmingPool,
+            @RequestParam(required = false) Boolean gymnasium,
+            @RequestParam(required = false) Boolean wifi,
+            @RequestParam(required = false) Boolean roomService,
+            @RequestParam(required = false) Boolean airCondition,
+            @RequestParam(required = false) Boolean breakfast) {
+        return service.searchFacilities(swimmingPool, gymnasium, wifi,
+                roomService, airCondition, breakfast);
+    }
+
     @PostMapping
     public Facilities create(@RequestBody Facilities facilities) {
         return service.create(facilities);
     }
 
-    // PUT: update fasilitas untuk hotel tertentu
     @PutMapping("/{hotelId}")
     public Facilities update(@PathVariable Integer hotelId,
-                                  @RequestBody Facilities request) {
+            @RequestBody Facilities request) {
         return service.update(hotelId, request);
     }
 }

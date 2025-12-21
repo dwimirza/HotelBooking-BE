@@ -1,5 +1,7 @@
 package com.group3.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,10 +18,11 @@ public class Facilities {
     @Column(name = "hotel_id")
     private Integer hotelId;
 
-    // @OneToOne
-    // @MapsId
-    // @JoinColumn(name = "hotel_id")
-    // private Hotel hotel;
+    @OneToOne(fetch = FetchType.LAZY)
+    @MapsId
+    @JoinColumn(name = "hotel_id")
+    @JsonIgnore
+    private Hotel hotel;
 
     @Column(name = "swimming_pool", nullable = false)
     private Boolean swimmingPool;

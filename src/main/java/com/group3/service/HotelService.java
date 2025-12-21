@@ -31,15 +31,27 @@ public class HotelService {
         repo.deleteById(id);
     }
 
-    public List<Hotel> search(String hotelName, String city) {
+    public List<Hotel> search(String hotelName, String city, Integer starRating) {
+        if (hotelName != null && city != null && starRating != null) {
+            return repo.findByHotelNameContainingIgnoreCaseAndCityAndStarRating(hotelName, city, starRating);
+        }
         if (hotelName != null && city != null) {
             return repo.findByHotelNameContainingIgnoreCaseAndCity(hotelName, city);
+        }
+        if (hotelName != null && starRating != null) {
+            return repo.findByHotelNameContainingIgnoreCaseAndStarRating(hotelName, starRating);
+        }
+        if (city != null && starRating != null) {
+            return repo.findByCityAndStarRating(city, starRating);
         }
         if (hotelName != null) {
             return repo.findByHotelNameContainingIgnoreCase(hotelName);
         }
         if (city != null) {
             return repo.findByCity(city);
+        }
+        if (starRating != null) {
+            return repo.findByStarRating(starRating);
         }
         return repo.findAll();
     }

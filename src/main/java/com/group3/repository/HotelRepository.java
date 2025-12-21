@@ -14,7 +14,13 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
     List<Hotel> findByHotelNameContainingIgnoreCaseAndCity(
             String hotelName, String city);
 
+    List<Hotel> findByHotelNameContainingIgnoreCaseAndStarRating(
+            String hotelName, Integer starRating);
+
     List<Hotel> findByStarRating(Integer starRating);
 
     List<Hotel> findByCityAndStarRating(String city, Integer starRating);
+
+    List<Hotel> findByHotelNameContainingIgnoreCaseAndCityAndStarRating(
+            String hotelName, String city, Integer starRating);
 }

@@ -24,35 +24,36 @@ public class HotelController {
     @GetMapping
     public List<Hotel> list(
             @RequestParam(required = false) String hotelName,
-            @RequestParam(required = false) String city)  {
-        return service.search(hotelName, city);
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) Integer starRating) {
+        return service.search(hotelName, city, starRating);
     }
 
-    @GetMapping("/{code}")
-    public Hotel detail(@PathVariable("code") Integer code) {
-        Optional<Hotel> hotel = service.findById(code);
+    @GetMapping("/{hotelId}")
+    public Hotel detail(@PathVariable("hotelId") Integer hotelId) {
+        Optional<Hotel> hotel = service.findById(hotelId);
         return hotel.orElseThrow(() -> 
-            new RuntimeException("Hotel not found with id: " + code));
+            new RuntimeException("Hotel not found with id: " + hotelId));
     }
 
-    @PutMapping("/{code}")
-    public Hotel update(@PathVariable("code") Integer code,
+    @PutMapping("/{hotelId}")
+    public Hotel update(@PathVariable("hotelId") Integer hotelId,
                         @RequestBody Hotel hotel) {
-        Optional<Hotel> existingHotel = service.findById(code);
+        Optional<Hotel> existingHotel = service.findById(hotelId);
         if (existingHotel.isPresent()) {
-            hotel.setHotelId(code);
+            hotel.setHotelId(hotelId);
             return service.save(hotel);
         }
-        throw new RuntimeException("Hotel not found with id: " + code);
+        throw new RuntimeException("Hotel not found with id: " + hotelId);
     }
 
-    @DeleteMapping("/{code}")
-    public void delete(@PathVariable("code") Integer code) {
-        Optional<Hotel> hotel = service.findById(code);
+    @DeleteMapping("/{hotelId}")
+    public void delete(@PathVariable("hotelId") Integer hotelId) {
+        Optional<Hotel> hotel = service.findById(hotelId);
         if (hotel.isPresent()) {
-            service.delete(code);
+            service.delete(hotelId);
         } else {
-            throw new RuntimeException("Hotel not found with id: " + code);
+            throw new RuntimeException("Hotel not found with id: " + hotelId);
         }
     }
 }
