@@ -1,6 +1,8 @@
 package com.group3.service;
 
+import com.group3.model.Hotel;
 import com.group3.model.Room;
+import com.group3.repository.HotelRepository;
 import com.group3.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,12 +18,23 @@ public class RoomService {
     
     @Autowired
     private RoomRepository roomRepository;
-    
+    @Autowired
+    private HotelRepository hotelRepository;
+     
     // CREATE
     public Room create(Room room) {
         if (room.getAvailability() == null) {
             room.setAvailability(0);
+        }      
+         Integer hotelId = room.getHotelId();
+        if (hotelId == null) {
+            throw new IllegalArgumentException("hotelId is required");
         }
+
+        Hotel hotel = hotelRepository.findById(hotelId)
+                .orElseThrow(() -> new IllegalArgumentException("Hotel not found with id: " + hotelId));
+        room.setHotel(hotel);
+        
         return roomRepository.save(room);
     }
     
