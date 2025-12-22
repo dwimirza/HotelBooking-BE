@@ -59,10 +59,10 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.updateBookingStatus(bookingId, status));
     }
 
-    // DELETE - Cancel booking
-    @DeleteMapping("/{bookingId}")
-    public ResponseEntity<Void> cancelBooking(@PathVariable Integer bookingId) {
-        bookingService.cancelBooking(bookingId);
-        return ResponseEntity.noContent().build();
-    }
+    // // DELETE - Cancel booking
+    // @DeleteMapping("/{bookingId}")
+    // public ResponseEntity<Void> cancelBooking(@PathVariable Integer bookingId) {
+    //     bookingService.cancelBooking(bookingId);
+    //     return ResponseEntity.noContent().build();
+    // }
 }

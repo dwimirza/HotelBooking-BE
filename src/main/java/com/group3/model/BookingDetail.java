@@ -15,20 +15,25 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class BookingDetail {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "detail_id")
     private Integer detailId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "booking_id")
+    @JoinColumn(name = "booking_id", nullable = false)
     @JsonIgnore
     private Booking booking;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id", nullable = false)
+    @JsonIgnore
     private Room room;
-    
+
+    @Column(name = "room_id", insertable = false, updatable = false)
+    private Integer roomId;
+
     @Column(name = "price_per_night")
     private BigDecimal pricePerNight;
 

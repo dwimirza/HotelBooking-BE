@@ -10,11 +10,13 @@ import com.group3.model.Booking;
 import com.group3.model.BookingDetail;
 import com.group3.model.Hotel;
 import com.group3.model.Room;
+import com.group3.model.Users;
 import com.group3.model.request.BookingRequest;
 import com.group3.model.request.BookingRequest.RoomBookingRequest;
 import com.group3.repository.BookingRepository;
 import com.group3.repository.HotelRepository;
 import com.group3.repository.RoomRepository;
+import com.group3.repository.UserRepository;
 
 @Service
 public class BookingService {
@@ -22,48 +24,54 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final HotelRepository hotelRepository;
     private final RoomRepository roomRepository;
+    private final UserRepository userRepository;
 
     public BookingService(BookingRepository bookingRepository,
             HotelRepository hotelRepository,
-            RoomRepository roomRepository) {
+            RoomRepository roomRepository,
+            UserRepository userRepository) {
         this.bookingRepository = bookingRepository;
         this.hotelRepository = hotelRepository;
         this.roomRepository = roomRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
-    public Booking createBooking(BookingRequest request) {
-        // Validasi hotel exist
-        Hotel hotel = hotelRepository.findById(request.getHotelId())
-                .orElseThrow(() -> new IllegalArgumentException("Hotel not found"));
+public Booking createBooking(BookingRequest request) {
+    // Attach hotel
+    Hotel hotel = hotelRepository.findById(request.getHotelId())
+            .orElseThrow(() -> new IllegalArgumentException("Hotel not found: " + request.getHotelId()));
 
-        // Build booking
-        Booking booking = Booking.builder()
-                .hotel(hotel)
-                .bookingDate(LocalDateTime.now())
-                .status("PENDING")
-                .totalAmount(request.getTotalAmount())
+    // Attach user (if you pass userId in request)
+    Users user = userRepository.findById(request.getUserId())
+            .orElseThrow(() -> new IllegalArgumentException("User not found: " + request.getUserId()));
+
+    Booking booking = Booking.builder()
+            .hotel(hotel)
+            .user(user)
+            .bookingDate(LocalDateTime.now())
+            .status("PENDING")
+            .totalAmount(request.getTotalAmount())
+            .build();
+
+    for (RoomBookingRequest roomReq : request.getRooms()) {
+        Room room = roomRepository.findById(roomReq.getRoomId())
+                .orElseThrow(() -> new IllegalArgumentException("Room not found: " + roomReq.getRoomId()));
+
+        BookingDetail detail = BookingDetail.builder()
+                .room(room)
+                .pricePerNight(roomReq.getPricePerNight())
+                .checkIn(roomReq.getCheckIn())
+                .checkOut(roomReq.getCheckOut())
+                .specialRequest(roomReq.getSpecialRequest())
                 .build();
 
-        // Add booking details
-        for (RoomBookingRequest roomReq : request.getRooms()) {
-            Room room = roomRepository.findById(roomReq.getRoomId())
-                    .orElseThrow(() -> new IllegalArgumentException("Room not found: " + roomReq.getRoomId()));
-
-            BookingDetail detail = BookingDetail.builder()
-                    .room(room)
-                    .pricePerNight(roomReq.getPricePerNight())
-                    .checkIn(roomReq.getCheckIn())
-                    .checkOut(roomReq.getCheckOut())
-                    .specialRequest(roomReq.getSpecialRequest())
-                    .build();
-
-            booking.addBookingDetail(detail);
-        }
-
-        // Save (cascade save semua details)
-        return bookingRepository.save(booking);
+        booking.addBookingDetail(detail);
     }
+
+    return bookingRepository.save(booking);
+}
+
 
     // Method tambahan untuk READ
     public List<Booking> getAllBookings() {

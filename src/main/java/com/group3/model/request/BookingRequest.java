@@ -8,6 +8,8 @@ import lombok.*;
 
 @Data
 public class BookingRequest {
+
+     private Integer userId;
     private Integer hotelId;
     private BigDecimal totalAmount;
     private List<RoomBookingRequest> rooms;
