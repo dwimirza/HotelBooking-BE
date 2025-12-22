@@ -29,11 +29,11 @@ public class HotelController {
         return service.search(hotelName, city, starRating);
     }
 
-    @GetMapping("/{hotelId}")
-    public Hotel detail(@PathVariable("hotelId") Integer hotelId) {
-        Optional<Hotel> hotel = service.findById(hotelId);
+    @GetMapping("/{hotelName}")
+    public Hotel detail(@PathVariable("hotelName") String hotelName) {
+        Optional<Hotel> hotel = service.findByName(hotelName);
         return hotel.orElseThrow(() -> 
-            new RuntimeException("Hotel not found with id: " + hotelId));
+            new RuntimeException("Hotel not found with name: " + hotelName));
     }
 
     @PutMapping("/{hotelId}")

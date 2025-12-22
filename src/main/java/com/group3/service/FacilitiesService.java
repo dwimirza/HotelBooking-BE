@@ -48,9 +48,10 @@ public class FacilitiesService {
             Boolean roomService,
             Boolean airCondition,
             Boolean breakfast) {
-        return facilitiesRepo.findBySwimmingPoolAndGymnasiumAndWifiAndRoomServiceAndAirConditionAndBreakfast(
-                swimmingPool, gymnasium, wifi,
-                roomService, airCondition, breakfast);
+        return facilitiesRepo.searchFacilities(
+            swimmingPool, gymnasium, wifi,
+            roomService, airCondition, breakfast
+    );
     }
 
     @Transactional

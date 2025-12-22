@@ -58,12 +58,12 @@ public class RoomController {
         return ResponseEntity.ok(roomService.getAvailableRoomsByHotel(hotelId));
     }
     
-    @GetMapping("/price-range")
-    public ResponseEntity<List<Room>> getRoomsByPriceRange(
-            @RequestParam BigDecimal minPrice,
-            @RequestParam BigDecimal maxPrice) {
-        return ResponseEntity.ok(roomService.getRoomsByPriceRange(minPrice, maxPrice));
-    }
+    // @GetMapping("/price-range")
+    // public ResponseEntity<List<Room>> getRoomsByPriceRange(
+    //         @RequestParam BigDecimal minPrice,
+    //         @RequestParam BigDecimal maxPrice) {
+    //     return ResponseEntity.ok(roomService.getRoomsByPriceRange(minPrice, maxPrice));
+    // }
     
     @GetMapping("/search")
     public ResponseEntity<List<Room>> searchRooms(

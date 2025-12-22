@@ -27,6 +27,10 @@ public class HotelService {
         return repo.findById(id);
     }
 
+    public Optional<Hotel> findByName(String hotelName) {
+        return repo.findByHotelName(hotelName);
+    }
+
     public void delete(Integer id) {
         repo.deleteById(id);
     }
