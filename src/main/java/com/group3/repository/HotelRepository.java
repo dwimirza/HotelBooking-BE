@@ -25,4 +25,6 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
             String hotelName, String city, Integer starRating);
 
         java.util.Optional<Hotel> findByHotelName(String hotelName);
+
+        
 }

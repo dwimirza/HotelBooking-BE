@@ -21,24 +21,23 @@ public class HotelController {
         return service.save(hotel);
     }
 
-    @GetMapping
-    public List<Hotel> list(
-            @RequestParam(required = false) String hotelName,
-            @RequestParam(required = false) String city,
-            @RequestParam(required = false) Integer starRating) {
-        return service.search(hotelName, city, starRating);
-    }
 
     @GetMapping("/{hotelName}")
     public Hotel detail(@PathVariable("hotelName") String hotelName) {
         Optional<Hotel> hotel = service.findByName(hotelName);
-        return hotel.orElseThrow(() -> 
-            new RuntimeException("Hotel not found with name: " + hotelName));
+        return hotel.orElseThrow(() -> new RuntimeException("Hotel not found with name: " + hotelName));
+    }
+
+    @GetMapping("/search")
+    public List<Hotel> search(
+            @RequestParam(required = false) String hotelName,
+            @RequestParam(required = false) Integer starRating) {
+        return service.search(hotelName, starRating);
     }
 
     @PutMapping("/{hotelId}")
     public Hotel update(@PathVariable("hotelId") Integer hotelId,
-                        @RequestBody Hotel hotel) {
+            @RequestBody Hotel hotel) {
         Optional<Hotel> existingHotel = service.findById(hotelId);
         if (existingHotel.isPresent()) {
             hotel.setHotelId(hotelId);
