@@ -39,14 +39,12 @@ public class UserService {
     //     repository.deleteById(code);
     // }
 
-    public List<Users> searchEmployees(String name, String zipcode) {
-        if (name != null && zipcode != null) {
+    public List<Users> searchEmployees(String name) {
+        if (name != null) {
             // return repository.findByEmpNameContainingIgnoreCaseAndEmpZipCode(name, zipcode);
         } else if (name != null) {
             return repository.findByUserNameContainingIgnoreCase(name);
-        } else if (zipcode != null) {
-            // return repository.findByEmpZipCode(zipcode);
-        }
+        } 
         return repository.findAll();
     }
 }

@@ -46,8 +46,7 @@ public class UserController {
 
     @GetMapping("/search")
     public List<Users> searchEmployees(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String zipcode) {
-        return service.searchEmployees(name, zipcode);
+            @RequestParam(required = false) String name) {
+        return service.searchEmployees(name);
     }
 }
